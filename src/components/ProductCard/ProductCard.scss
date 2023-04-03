@@ -1,0 +1,28 @@
+.ProductCard {
+	width: 100%;
+	display: flex;
+	padding: 30px;
+	gap: 50px;
+	text-align: left;
+	margin-bottom: 30px;
+	box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+	& .Col {
+		display: flex;
+		gap: 15px;
+		flex-direction: column;
+		min-width: 280px;
+	}
+	& strong {
+		margin-right: 10px;
+	}
+	& .BadgeWrapper {
+		display: flex;
+		gap: 10px;
+		& .Badge {
+			background-color: #ebe5e5;
+			padding: 4px 8px;
+			font-size: 12px;
+			border-radius: 6px;
+		}
+	}
+}

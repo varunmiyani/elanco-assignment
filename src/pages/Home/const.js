@@ -1,6 +1,9 @@
-export const TABS = {
-	applicants: 'applicants',
+export const CONST = {
+	applications: 'applications',
 	resources: 'resources',
 };
 
-export const initialFilter = {};
+export const initialFilter = {
+	applications: [],
+	resources: [],
+};

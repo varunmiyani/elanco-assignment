@@ -1,5 +1,5 @@
 .HomeWrapper {
-	border: 1px solid red;
+	// border: 1px solid red;
 }
 
 .HomeWrapper .Container {
@@ -7,4 +7,45 @@
 	max-width: 1200px;
 	margin: 0 auto;
 	display: flex;
+	gap: 30px;
+	text-align: left;
+	& .FilterWrapper {
+		min-width: 250px;
+		box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+			rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+		& .Divider {
+			border: 1px groove #ccc;
+			width: 80%;
+			margin: 40px auto;
+		}
+		& .Name {
+			font-weight: bold;
+			margin-left: 40px;
+		}
+		& .CheckList {
+			max-height: 300px;
+			overflow: auto;
+			& li {
+				// border: 1px solid red;
+				list-style-type: none;
+				height: 35px;
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				cursor: pointer;
+				& :hover {
+					background-color: lightgrey;
+				}
+			}
+		}
+	}
+	& .ContentWrapper {
+		& .Records {
+			text-align: left;
+		}
+		& .ProductListWrapper {
+			// max-height: 90%;
+			// overflow: auto;
+		}
+	}
 }
