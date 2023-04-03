@@ -1,0 +1,17 @@
+{
+	"editor.tabSize": 2, 
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.formatOnSave": true,
+	"files.trimTrailingWhitespace": true,
+	"files.trimFinalNewlines": true,
+	"prettier.tabWidth": 2,
+	"prettier.useTabs": true,
+	"prettier.jsxSingleQuote": true,
+	"prettier.singleQuote": true,
+	"prettier.bracketSameLine": true,
+	"prettier.proseWrap": "always",
+	"prettier.arrowParens": "avoid",
+	"[javascript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	}
+}
