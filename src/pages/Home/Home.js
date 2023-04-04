@@ -43,6 +43,7 @@ const Home = props => {
 
 	useEffect(() => {
 		if (Object?.keys(filter)?.length === 0 || records?.length === 0) return;
+		setLoadingRecords(true);
 		let newFilterRecords = _.cloneDeep(records);
 		if (filter?.applications?.length > 0) {
 			newFilterRecords = newFilterRecords.filter(f =>
@@ -54,7 +55,14 @@ const Home = props => {
 				filter?.resources.includes(f.ServiceName)
 			);
 		}
+		if (filter?.sort === 'LTH') {
+			newFilterRecords = newFilterRecords.sort((a, b) => a.Cost - b.Cost);
+		}
+		if (filter?.sort === 'HTL') {
+			newFilterRecords = newFilterRecords.sort((a, b) => b.Cost - a.Cost);
+		}
 		setFilterRecords(newFilterRecords);
+		setLoadingRecords(false);
 	}, [filter, records]);
 
 	useEffect(() => {
@@ -87,50 +95,56 @@ const Home = props => {
 					<p className='Name'>Applications</p>
 					<div>
 						<ul className='CheckList'>
-							{loadingFilters ? <li>Loading....</li> : null}
-							{applications?.map(application => {
-								return (
-									<li key={application}>
-										<input
-											type='checkbox'
-											id={application}
-											checked={!!filter?.applications?.includes(application)}
-											onChange={() =>
-												toggleCheckList({
-													key: CONST.applications,
-													id: application,
-												})
-											}
-										/>{' '}
-										<label htmlFor={application}>{application}</label>
-									</li>
-								);
-							})}
+							{loadingFilters ? (
+								<li>Loading....</li>
+							) : (
+								applications?.map(application => {
+									return (
+										<li key={application}>
+											<input
+												type='checkbox'
+												id={application}
+												checked={!!filter?.applications?.includes(application)}
+												onChange={() =>
+													toggleCheckList({
+														key: CONST.applications,
+														id: application,
+													})
+												}
+											/>{' '}
+											<label htmlFor={application}>{application}</label>
+										</li>
+									);
+								})
+							)}
 						</ul>
 					</div>
 					<div className='Divider' />
 					<p className='Name'>Resources</p>
 					<div>
 						<ul className='CheckList'>
-							{loadingFilters ? <li>Loading....</li> : null}
-							{resources?.map(resource => {
-								return (
-									<li key={resource}>
-										<input
-											type='checkbox'
-											id={resource}
-											checked={!!filter?.resources?.includes(resource)}
-											onChange={() =>
-												toggleCheckList({
-													key: CONST.resources,
-													id: resource,
-												})
-											}
-										/>{' '}
-										<label htmlFor={resource}>{resource}</label>
-									</li>
-								);
-							})}
+							{loadingFilters ? (
+								<li>Loading....</li>
+							) : (
+								resources?.map(resource => {
+									return (
+										<li key={resource}>
+											<input
+												type='checkbox'
+												id={resource}
+												checked={!!filter?.resources?.includes(resource)}
+												onChange={() =>
+													toggleCheckList({
+														key: CONST.resources,
+														id: resource,
+													})
+												}
+											/>{' '}
+											<label htmlFor={resource}>{resource}</label>
+										</li>
+									);
+								})
+							)}
 						</ul>
 					</div>
 					<div className='Divider' />
@@ -142,9 +156,22 @@ const Home = props => {
 						</div>
 					) : (
 						<>
-							<p className='Records'>
-								{filterRecords?.length || 0} records found
-							</p>
+							<div className='SortWrapper'>
+								<p className='Records'>
+									{filterRecords?.length || 0} records found
+								</p>
+								<select
+									onChange={e => {
+										if (!e.target.value) return;
+										const newFilter = _.cloneDeep(filter);
+										newFilter.sort = e.target.value;
+										setFilter(newFilter);
+									}}>
+									<option>Sort by cost</option>
+									<option value='LTH'>Low to High</option>
+									<option value='HTL'>Hight to Low</option>
+								</select>
+							</div>
 							<div className='ListWrapper'>
 								{filterRecords.map((record, recordIndex) => {
 									return (

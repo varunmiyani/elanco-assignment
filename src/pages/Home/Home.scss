@@ -40,6 +40,16 @@
 		}
 	}
 	& .ContentWrapper {
+		width: 100%;
+		& .SortWrapper {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			// border: 1px solid red;
+			& select {
+				height: 30px;
+			}
+		}
 		& .Records {
 			text-align: left;
 		}
